@@ -1,10 +1,20 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import requests
 
 app = FastAPI()
 
-# ✅ Crop moisture reference (based on your image)
+# ✅ Enable CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Replace with specific origins in production
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# ✅ Crop moisture reference
 IDEAL_CROP_MOISTURE = {
     "rice": 30,
     "maize": 50,
